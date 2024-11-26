@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients - Gym Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Prevent caching for this page
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html'; // Force redirect to login if not logged in
+        }
+    
+        // Disable cache for this page, and ensure it doesn't show old content
+        window.onload = function () {
+            history.pushState(null, null, location.href); // Disable back functionality
+            window.onpopstate = function () {
+                history.pushState(null, null, location.href); // Disable forward functionality
+            };
+        };
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="logout.html" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <nav>
+                <h1>Manage Clients</h1>
+            </nav>
+
+            <!-- Add New Client Form -->
+            <section class="add-client-form">
+                <h2>Add New Client</h2>
+                <form id="addClientForm">
+                    <input type="text" id="clientName" placeholder="Client Name" required>
+                    <input type="date" id="joinDate" required>
+                    <input type="tel" id="clientMobile" placeholder="Mobile Number" required>
+                    <input type="text" id="clientPlan" placeholder="Plan (e.g., Monthly)" required>
+                    <input type="number" id="moneyPaid" placeholder="Money Paid" required>
+                    <label for="activeStatus">Active</label>
+                    <input type="checkbox" id="activeStatus">
+                    <button type="submit">Add Client</button>
+                </form>
+            </section>
+
+            <!-- Client List Table -->
+            <section class="client-list">
+                <h2>Clients</h2>
+                <table id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date of Join</th>
+                            <th>Mobile Number</th>
+                            <th>Plan</th>
+                            <th>Money Paid</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientData">
+                        <!-- Client Data Will Be Injected Here -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <script src="clients.js"></script>
+</body>
+</html>

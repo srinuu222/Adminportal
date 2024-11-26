@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Prevent caching for this page
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html'; // Force redirect to login if not logged in
+        }
+    
+        // Disable cache for this page, and ensure it doesn't show old content
+        window.onload = function () {
+            history.pushState(null, null, location.href); // Disable back functionality
+            window.onpopstate = function () {
+                history.pushState(null, null, location.href); // Disable forward functionality
+            };
+        };
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="clients.html">Clients</a></li>
+                <li><a href="logout.html" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <nav>
+                <h1>Gym Admin Dashboard</h1>
+            </nav>
+
+            <!-- Dashboard Stats -->
+            <section id="mainDashboard" class="dashboard">
+                <div class="card">
+                    <h3>Total Clients</h3>
+                    <p id="totalClients">0</p>
+                </div>
+                <div class="card">
+                    <h3>New Clients</h3>
+                    <p id="newClients">0</p>
+                </div>
+                <div class="card">
+                    <h3>Active Clients</h3>
+                    <p id="activeClients">0</p>
+                </div>
+                <div class="card">
+                    <h3>Membership Expiry</h3>
+                    <p id="membershipExpiry">0</p>
+                </div>
+            </section>
+
+            <!-- Client Table -->
+            <section id="clientsList" class="clients-list">
+                <h2>Clients</h2>
+                <table id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date of Join</th>
+                            <th>Mobile Number</th>
+                            <th>Plan</th>
+                            <th>Money Paid</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientData">
+                        <!-- Dynamic Client Data -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
